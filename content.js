@@ -7,7 +7,7 @@ function getVideoTitle() {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) =>{
     if (request.action === "getvideoDetails") {
-        const title = getvideoTitle();
+        const title = getVideoTitle();
         sendResponse({videoTitle: title, videoUrl: window.location.href});
     }
 });
