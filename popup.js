@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const notesArea = document.getElementById("notesArea");
   const saveBtn = document.getElementById("saveBtn");
 
-chrome.storage.local.getElementById(["savedNotes"], (result) => {
+chrome.storage.local.get(["savedNotes"], (result) => {
     if (result.savedNotes) {
         notesArea.value = result.savedNotes;
     }
