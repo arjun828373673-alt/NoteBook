@@ -1,14 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
-    chrome.storage.local.get(["savedNotes"], (result) => {
-        if (result.savedNotes) {
-            document.getElementById("notesArea").value = result.savedNotes;
-        }
-    });
+  const notesArea = document.getElementById("notesArea");
+  const saveBtn = document.getElementById("saveBtn");
+
+chrome.storage.local.getElementById(["savedNotes"], (result) => {
+    if (result.savedNotes) {
+        notesArea.value = result.savedNotes;
+    }
 });
 
-document.getElementById("savebtn").addEventListener("click", () => {
-    const notesText = document.getElementById("notesArea").value;
-    chrome.storage.local.set({ savedNotes: notesText }, () =>{
-      alert("Notes saved Successfully");
+saveBtn.addEventListener("click", () => {
+    const notesText = notesArea.value;
+    chrome.storage.local.set({ savedNotes: notesText}, ()=> {
+        alert("Notes saved successfully");
     });
 });
