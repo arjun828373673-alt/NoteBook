@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Notebook - Study companion",
+    "version": "1.0",
+    "description": "Auto-generate study notes and 3D diagram from youtube videos",
+    "permissions": [
+        "activeTab",
+        "storage",
+        "scripting"
+    ],
+    "action": {
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.youtube.com/watch*"],
+            "js": ["script.js"]
+        }
+    ]
+}
