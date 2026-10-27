@@ -13,5 +13,6 @@ saveBtn.addEventListener("click", () => {
     chrome.storage.local.set({ savedNotes: notesText}, ()=> {
         alert("Notes saved successfully");
     });
+    
 });
 });
