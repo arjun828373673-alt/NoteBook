@@ -14,3 +14,4 @@ saveBtn.addEventListener("click", () => {
         alert("Notes saved successfully");
     });
 });
+});
