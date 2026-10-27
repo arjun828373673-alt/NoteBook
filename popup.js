@@ -14,7 +14,7 @@ chrome.tabs.query({ active: true, currentWindow: true}, (tabs) => {
         chrome.tabs.sendMessage(activeTab.id, {action: "getvideoDetails"}, (response) => {
             if (response && response.videoTitle) {
                 if (!notesArea.value) {
-                    notesArea.value = `Video: ${response.videoTitle}\nURL: ${respones.videoUrl}\n\nNotes:\n`;
+                    notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nNotes:\n`;
                 }
             }
         });
