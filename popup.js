@@ -13,11 +13,13 @@ chrome.tab.query({ active: true, currentWindow: true}, (tabs) => {
     if (activeTab && activeTab.url && activeTab.url.includes("youtube.com/watch")) {
         chrome.tabs.sendMessage(activeTab.id, {action: "getvideoDetails"}, (response) => {
             if (respones && respones.videoTitle) {
-                if (!notesArea.value)
+                if (!notesArea.value) {
+                    notesArea.value = `Video: ${response.videoTitle}\nURL: ${respones.videoUrl}\n\nNotes:\n`;
+                }
             }
-        })
+        });
     }
-})
+});
 
 saveBtn.addEventListener("click", () => {
     const notesText = notesArea.value;
