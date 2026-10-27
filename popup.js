@@ -10,8 +10,8 @@ chrome.storage.local.get(["savedNotes"], (result) => {
 
 chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     const activeTab = tabs[0];
-    if (activeTab && 
-        
+    if (activeTab && activeTab.url && activeTabUrl)
+
 saveBtn.addEventListener("click", () =>{
     const notesText = Area.value;
     chrome.storage.local.set({ savedNotes: notesText}, ()=> {
