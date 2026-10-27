@@ -8,11 +8,11 @@ chrome.storage.local.get(["savedNotes"], (result) => {
     }
 });
 
-chrome.tab.query({ active: true, currentWindow: true}, (tabs) => {
+chrome.tabs.query({ active: true, currentWindow: true}, (tabs) => {
     const activeTab = tabs[0];
     if (activeTab && activeTab.url && activeTab.url.includes("youtube.com/watch")) {
         chrome.tabs.sendMessage(activeTab.id, {action: "getvideoDetails"}, (response) => {
-            if (respones && respones.videoTitle) {
+            if (response && response.videoTitle) {
                 if (!notesArea.value) {
                     notesArea.value = `Video: ${response.videoTitle}\nURL: ${respones.videoUrl}\n\nNotes:\n`;
                 }
