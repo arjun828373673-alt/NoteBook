@@ -8,31 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  chrome.tabs.query({ active: true, currentWindow: true}, (tabs) => {
     const activeTab = tabs[0];
     if (activeTab && activeTab.url && activeTab.url.includes("youtube.com/watch")) {
-      chrome.scripting.executeScript({
-        target: { tabId: activeTab.id },
-        func: () => {
-          const titleElement =
-            document.querySelector("h1.ytd-watch-metadata") ||
-            document.querySelector("yt-formatted-string.style-scope.ytd-watch-metadata");
-          const title = titleElement
-            ? titleElement.innerText.trim()
-            : document.title.replace("- YouTube", "").trim();
-          return { videoTitle: title, videoUrl: window.location.href };
+      chrome.tabs.sendMessage(activeTab.id, { action: "getvideoDetails"}, (response)=> {
+      if (chrome.runtime.lastError) {
+        console.log(chrome.runtime.lastError.message);
+        return;
+      }  
+      if (response) {
+        if (!notesArea.value) {
+          notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
         }
-      }, (result) => {
-        if (result && result[0] && result[0].result) {
-            const res = result[0].result;
-            if (!notesArea.value) {
-                notesArea.value = `Video: ${res.videoTitle}\nURL: ${res.videoUrl}\n\nNotes:\n`;
-            }
-        }
-      });
+      }
+      })
     }
-  });
-
+  })
 
   saveBtn.addEventListener("click", () => {
     const notesText = notesArea.value;
