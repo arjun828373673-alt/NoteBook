@@ -21,7 +21,7 @@ async function getAutoTranscript() {
             if (text.trim().length > 0) return text.trim();
         }
         const scripts = document.querySelectorAll("script");
-        let playerRespones = null;
+        let playerResponse = null;
 
         for (const script of scripts) {
             const content = script.textContent;
@@ -29,7 +29,7 @@ async function getAutoTranscript() {
                 const match = content.match(/ytInitialPlayerResponse\s*=\s*({.+?});/);
                 if (match && match[1]) {
                     try{
-                        playerRespones = JSON.parse(match[1]);
+                        playerResponse = JSON.parse(match[1]);
                         break;
                     } catch (e) {
 
@@ -38,7 +38,7 @@ async function getAutoTranscript() {
             }
         }
 
-        const tracks = playerRespones?.captions?.playerCaptionsTrackListRenderer?.captionTracks;
+        const tracks = playerResponse?.captions?.playerCaptionsTrackListRenderer?.captionTracks;
         if (tracks && tracks.length > 0) {
             const trackUrl = tracks[0].baseUrl;
             const response = await fetch(trackUrl);
