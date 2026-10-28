@@ -59,21 +59,28 @@ async function getAutoTranscript() {
         }
 
         return "Automatic transcript extraction pending: Please ensure video has captions enable.";
-    } catch (e) {
+    } catch (err) {
         return "Unable to extract transcript.";
     }
+}
+
+function decodeEntities(str) {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) =>{
     if (request.action === "getvideoDetails") {
         const title = getVideoTitle();
-        const transcript = getTranscriptText();
+        getAutoTranscript(). then(transcript => {
         sendResponse({
             videoTitle: title,
             videoUrl: window.location.href,
             transcriptText: transcript
         });
+        });
+        return true;
     }
 });
     
-});
