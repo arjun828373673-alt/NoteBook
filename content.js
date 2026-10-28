@@ -21,7 +21,8 @@ async function getAutoTranscript() {
             if (text.trim().length > 0) return text.trim();
         }
         const scripts = document.querySelectorAll("script");
-        
+    } catch (error) {
+        return "";
     }
 }
 
