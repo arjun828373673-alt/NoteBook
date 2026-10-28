@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
           return { videoTitle: title, videoUrl: window.location.href };
         }
       }, (result) => {
-        if (result && result[0] && results[0].result) {
+        if (result && result[0] && result[0].result) {
             const res = result[0].result;
             if (!notesArea.value) {
                 notesArea.value = `Video: ${res.videoTitle}\nURL: ${res.videoUrl}\n\nNotes:\n`;
