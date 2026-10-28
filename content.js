@@ -27,6 +27,11 @@ function getTranscriptText() {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) =>{
     if (request.action === "getvideoDetails") {
         const title = getVideoTitle();
-        sendResponse({videoTitle: title, videoUrl: window.location.href});
+        const transcript = getTranscriptText();
+        sendResponse({
+            videoTitle: title,
+            videoUrl: window.location.href,
+            transcriptText: transcript
+        })
     }
 });
