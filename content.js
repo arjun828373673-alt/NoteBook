@@ -32,7 +32,7 @@ async function getAutoTranscript() {
                         playerResponse = JSON.parse(match[1]);
                         break;
                     } catch (e) {
-                        
+
                     }
                 }
             }
@@ -45,7 +45,7 @@ async function getAutoTranscript() {
             const textData = await response.text();
 
             const parser = new DOMParser();
-            const xmlDoc = parser.parserFromString(textData, "text/xml");
+            const xmlDoc = parser.parseFromString(textData, "text/xml");
             const textNodes = xmlDoc.getElementsByTagName("text");
 
             let fullTranscript = "";
