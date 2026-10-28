@@ -15,6 +15,8 @@ chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
             target: { tabId: activeTab.id},
             func: () => {
                 const titleElement = document.querySelector("h1.ytd-watch-metadata") ||document.querySelector("yt-formatted-string.style-scope.ytd-watch-metadata");
+                const title = titleElement ? titleElement.innierText.trim() : document.title.replace("- YouTube", "").trim();
+                return { videoTitle: title, videoUrl: window.location.href};
             }
         })
     }
