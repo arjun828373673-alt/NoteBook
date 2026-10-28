@@ -52,7 +52,14 @@ async function getAutoTranscript() {
             for (let i = 0; i < textNodes.length; i++) {
                 fullTranscript += textNodes[i].textContent + " ";
             }
+
+            if (fullTranscript.trim().length > 0){
+                return decodeEntities(fullTranscript.trim());
+            }
         }
+
+        return "Automatic transcript extraction pending: Please ensure video has captions enable.";
+
     }
 }
 
@@ -64,6 +71,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) =>{
             videoTitle: title,
             videoUrl: window.location.href,
             transcriptText: transcript
-        })
-    }
+        });
+    });
+    
 });
