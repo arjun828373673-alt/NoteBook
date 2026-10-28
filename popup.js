@@ -10,7 +10,11 @@ chrome.storage.local.get(["savedNotes"], (result) => {
 
 chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     const activeTab = tabs[0];
-    if (activeTab && activeTab.url && activeTabUrl)
+    if (activeTab && activeTab.url && activeTab.url.includes("youtube.com/watch")) {
+        chrome.scripting.excuteScript({
+            target: { tabId}
+        })
+    }
 
 saveBtn.addEventListener("click", () =>{
     const notesText = Area.value;
