@@ -12,7 +12,10 @@ chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     const activeTab = tabs[0];
     if (activeTab && activeTab.url && activeTab.url.includes("youtube.com/watch")) {
         chrome.scripting.excuteScript({
-            target: { tabId}
+            target: { tabId: activeTab.id},
+            func: () => {
+                const titleElement = document.querySelector("h1.ytd-watch-metadata") ||document.querySelector("yt-formatted-string.style-scope.ytd-watch-metadata");
+            }
         })
     }
 
