@@ -9,19 +9,20 @@ function getVideoTitle() {
 return document.title.replace(" - YouTube", "").trim();
 }
 
-function getTranscriptText() {
-    const transcriptSegments = document.querySelectorAll("ytd-transcript-segment-renderer");
-    if (transcriptSegments && transcriptSegments.length > 0) {
-        let transcriptText = "";
-        transcriptSegments.forEach(segment => {
-            const textElement = segment.querySelector("#content");
-           if (textElement) {
-            transcriptText += textElement.innerText.trim() + " ";
-           }
-        });
-        return transcriptText.trim();
+async function getAutoTranscript() {
+    try{
+        const transcriptSegments = document.querySelectorAll("ytd-transcript-segment-renderer");
+        if (transcriptSegments && transcriptSegments.length > 0) {
+            let text = "";
+            transcriptSegments.forEach(segment => {
+                const textElement = segment.querySelector("#content");
+                if (textElement) text += textElement.innerText.trim() + " "; 
+            });
+            if (text.trim().length > 0) return text.trim();
+        }
+        const scripts = document.querySelectorAll("script");
+        
     }
-    return "Transcript not open or available. Please open the transcript panel on YouTube first. ";
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) =>{
