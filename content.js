@@ -21,7 +21,38 @@ async function getAutoTranscript() {
             if (text.trim().length > 0) return text.trim();
         }
         const scripts = document.querySelectorAll("script");
-        
+        let playerRespones = null;
+
+        for (const script of scripts) {
+            const content = script.textContent;
+            if (content && content.includes("ytInitialPlayerResponse")) {
+                const match = content.match(/ytInitialPlayerResponse\s*=\s*({.+?});/);
+                if (match && match[1]) {
+                    try{
+                        playerRespones = JSON.parse(match[1]);
+                        break;
+                    } catch (e) {
+
+                    }
+                }
+            }
+        }
+
+        const tracks = playerRespones?.captions?.playerCaptionsTrackListRenderer?.captionTracks;
+        if (tracks && tracks.length > 0) {
+            const trackUrl = tracks[0].baseUrl;
+            const response = await fetch(trackUrl);
+            const textData = await response.text();
+
+            const parser = new DOMParser();
+            const xmlDoc = parser.parserFromString(textData, "text/xml");
+            const textNodes = xmlDoc.getElementsByTagName("text");
+
+            let fullTranscript = "";
+            for (let i = 0; i < textNodes.length; i++) {
+                fullTranscript += textNodes[i].textContent + " ";
+            }
+        }
     }
 }
 
