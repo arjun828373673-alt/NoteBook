@@ -59,7 +59,8 @@ async function getAutoTranscript() {
         }
 
         return "Automatic transcript extraction pending: Please ensure video has captions enable.";
-
+    } catch (e) {
+        return "Unable to extract transcript.";
     }
 }
 
@@ -72,6 +73,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) =>{
             videoUrl: window.location.href,
             transcriptText: transcript
         });
-    });
+    }
+});
     
 });
