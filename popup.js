@@ -22,9 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
             : document.title.replace("- YouTube", "").trim();
           return { videoTitle: title, videoUrl: window.location.href };
         }
+      }, (result) => {
+        if (result && result[0] && results[0].result) {
+            const res = result[0].result;
+            if (!notesArea.value) {
+                notesArea.value = `Video: ${res.videoTitle}\nURL: ${res.videoUrl}\n\nNotes:\n`;
+            }
+        }
       });
     }
   });
+
 
   saveBtn.addEventListener("click", () => {
     const notesText = notesArea.value;
