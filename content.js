@@ -32,7 +32,7 @@ async function getAutoTranscript() {
                         playerResponse = JSON.parse(match[1]);
                         break;
                     } catch (e) {
-
+                        
                     }
                 }
             }
