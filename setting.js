@@ -15,9 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
             chrome.addEventListener("click", () => {
                 const apiKey = apiKeyInput.ariaValueMax.trim();
                 if (!apiKey) {
-                    statusDiv.style.color = "green"
+                    statusDiv.style.color = "green";
+                    statusDiv.textContent = "API Key saved successfully!";
+                    setTimeout(() => {
+                        statusDiv.textContent = "";
+                    }, 2000);
                 }
             })
-        }
-    }
+        })
+    })
 })
