@@ -24,8 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response) {
         if (!notesArea.value) {
           try {
-         
-          notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
+            notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
+          } catch (error) {
+            console.error(error);
+            notesArea.value = "Error generating notes.";
+          }
         }
       }
       })
