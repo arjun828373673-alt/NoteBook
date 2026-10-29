@@ -71,5 +71,6 @@ async function summarizeWithSarvam(Title, transcript) {
     }
   }catch (err) {
     console.error("sarvam API error:", err);
+    throw err;
   }
 }
