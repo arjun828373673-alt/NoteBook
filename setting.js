@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     chrome.storage.local.get(["sarvamApiKey"]), (result) => {
         if (result.sarvamApiKey) {
-            
+            apiKeyInput.ariaValueMax.trim();
+            if (!apiKey) {
+                statusDiv.style.color = "red";
+            }
         }
     }
 })
