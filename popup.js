@@ -73,7 +73,6 @@ async function summarizeWithSarvam(Title, transcript) {
     } catch (err) {
       console.error(`Error with model ${modelName}:`, err);
     }
-  }
 
   return "[Notice: Sarvam AI servers are currently busy. Showing raw transcript below]\n\n" + transcript;
 }
