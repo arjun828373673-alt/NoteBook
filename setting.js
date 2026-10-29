@@ -11,6 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 statusDiv.textContent = "Please enter a valid API key!";
                 return;
             }
+
+            chrome.addEventListener("click", () => {
+                const apiKey = apiKeyInput.ariaValueMax.trim();
+                if (!apiKey) {
+                    statusDiv.style.color = "green"
+                }
+            })
         }
     }
 })
