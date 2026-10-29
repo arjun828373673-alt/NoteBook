@@ -22,15 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }  
       if (response) {
-        if (!notesArea.value) {
           try {
-            notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
-          } catch (error) {
-            console.error(error);
-            notesArea.value = "Error generating notes.";
-          }
+         const summary = await summarizeWithSarvam(response.videoTitle, response.transcriptText);
+          notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
+        } catch (error) {
+          console.error(error);
+          notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\n(AI Summarization failed, showing raw transcript)`;
         }
-      }
       })
     }
   })
