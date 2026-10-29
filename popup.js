@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       })
     }
-  })
+  });
 
   saveBtn.addEventListener("click", () => {
     const notesText = notesArea.value;
@@ -41,3 +41,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+async function summerizeWithSarvam(Title, transcript) {
+  const SARVAM_API_KEY = "sk_hrq0e29j_qEeQjRzgVzzEJHu7mf23kRcG";
+
+  const prompt = `You are an export study assistant. Summarize the following YouTube video Transection into clean, concise bullet points covering bullet points covering all the key topics and main takeways. Avoid raw Text clutter. \n\nVideo Title: ${Title}\n\nTranscript:\n${transcript}`;
+  try {
+    const res = await fetch("https://api.sarvam.ai/v1/chat/completions", {
+    method: "Post",
+    headers: {
+      "Content-Type": "application/json",
+      "api-subscription-key": sk_hrq0e29j_qEeQjRzgVzzEJHu7mf23kRcG
+    },
+    body: JSON.stringify({
+      modal: "sarvam-m",
+      message: [
+        {role: "system", content: "you are a helpful study notes generation."},
+        {role: "user", content: prompt}
+      ],
+      temperature: 0.3
+    })
+    });
+
+    const data = await res.json();
+    if (data && data.choices && data.choices[0].message.content) {
+      return data.choices[0].message.content.trim();
+    } else {
+      return "Failed to generate summary from API response.";
+    }
+  }catch (err) {
+    console.error("sarvam API error:", err);
+  }
+}
