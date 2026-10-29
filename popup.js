@@ -68,10 +68,10 @@ async function summarizeWithSarvam(Title, transcript) {
       if (res.ok && data && data.choices && data.choices[0].message.content) {
         return data.choices[0].message.content.trim();
       } else {
-        console.warn(`Model ${modelName} response failed, trying next...`, data);
+        console.warn(`Model ${"sarvam-105b-conversations"} response failed, trying next...`, data);
       }
     } catch (err) {
-      console.error(`Error with model ${modelName}:`, err);
+      console.error(`Error with model ${"sarvam-105b-conversations"}:`, err);
     }
 
   return "[Notice: Sarvam AI servers are currently busy. Showing raw transcript below]\n\n" + transcript;
