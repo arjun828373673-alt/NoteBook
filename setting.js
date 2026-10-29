@@ -3,5 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const savebtn = document.getElementById("savebtn");
     const statusDiv = document.getElementById("status");
 
-    chrome.storage.local.get(["sarvamApiKey"])
+    chrome.storage.local.get(["sarvamApiKey"]), (result) => {
+        if (result.sarvamApiKey) {
+            
+        }
+    }
 })
