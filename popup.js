@@ -11,9 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
   chrome.tabs.query({ active: true, currentWindow: true}, (tabs) => {
     const activeTab = tabs[0];
     if (activeTab && activeTab.url && activeTab.url.includes("youtube.com/watch")) {
-      chrome.tabs.sendMessage(activeTab.id, { action: "getvideoDetails"}, (response)=> {
+
+      if (!notesArea.value) {
+        notesArea.value = "Generating your notes...";
+      }
+      chrome.tabs.sendMessage(activeTab.id, { action: "getvideoDetails"}, async (response)=> {
       if (chrome.runtime.lastError) {
         console.log(chrome.runtime.lastError.message);
+        notesArea.value = "Error unable to connect to youtube page.";
         return;
       }  
       if (response) {
