@@ -54,7 +54,7 @@ async function summarizeWithSarvam(Title, transcript) {
       "api-subscription-key": "sk_hrq0e29j_qEeQjRzgVzzEJHu7mf23kRcG"
     },
     body: JSON.stringify({
-      model: "sarvam-m",
+      model: "sarvam-105b",
       messages: [
         {role: "system", content: "you are a helpful study notes generation."},
         {role: "user", content: prompt}
