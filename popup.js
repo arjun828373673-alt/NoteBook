@@ -63,21 +63,17 @@ async function summarizeWithSarvam(Title, transcript) {
     })
     });
 
-    const responseText = await res.text();
-    console.log("Sarvam API Response Status:", res.status);
-    console.log("Sarvam API Raw Response:", responseText);
-    if (!res.ok) {
-      return `API Error (Status ${res.status}): ${responseText}`;
+   const data = await res.json();
+      
+      if (res.ok && data && data.choices && data.choices[0].message.content) {
+        return data.choices[0].message.content.trim();
+      } else {
+        console.warn(`Model ${modelName} response failed, trying next...`, data);
+      }
+    } catch (err) {
+      console.error(`Error with model ${modelName}:`, err);
     }
-
-    const data = await res.json();
-    if (data && data.choices && data.choices[0].message.content) {
-      return data.choices[0].message.content.trim();
-    } else {
-      return "Failed to generate summary from API response.";
-    }
-  }catch (err) {
-    console.error("sarvam API error:", err);
-    throw err;
   }
+
+  return "[Notice: Sarvam AI servers are currently busy. Showing raw transcript below]\n\n" + transcript;
 }
