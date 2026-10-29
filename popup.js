@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response) {
           try {
          const summary = await summarizeWithSarvam(response.videoTitle, response.transcriptText);
-         notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
+         notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nAI Notes:\n${summary}`;
         } catch (error) {
           console.error(error);
           notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\n(AI Summarization failed, showing raw transcript)`;
