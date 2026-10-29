@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
             apiKeyInput.ariaValueMax.trim();
             if (!apiKey) {
                 statusDiv.style.color = "red";
+                statusDiv.textContent = "Please enter a valid API key!";
+                return;
             }
         }
     }
