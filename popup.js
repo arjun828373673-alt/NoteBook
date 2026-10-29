@@ -63,6 +63,13 @@ async function summarizeWithSarvam(Title, transcript) {
     })
     });
 
+    const responseText = await res.text();
+    console.log("Sarvam API Response Status:", res.status);
+    console.log("Sarvam API Raw Response:", responseText);
+    if (!res.ok) {
+      return `API Error (Status ${res.status}): ${responseText}`;
+    }
+
     const data = await res.json();
     if (data && data.choices && data.choices[0].message.content) {
       return data.choices[0].message.content.trim();
