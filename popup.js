@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }  
       if (response) {
           try {
-         const summary = await summarizeWithSarvam(response.videoTitle, response.transcriptText);
+         const summary = await summerizeWithSarvam(response.videoTitle, response.transcriptText);
           notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
         } catch (error) {
           console.error(error);
@@ -51,11 +51,11 @@ async function summerizeWithSarvam(Title, transcript) {
     method: "Post",
     headers: {
       "Content-Type": "application/json",
-      "api-subscription-key": sk_hrq0e29j_qEeQjRzgVzzEJHu7mf23kRcG
+      "api-subscription-key": "sk_hrq0e29j_qEeQjRzgVzzEJHu7mf23kRcG"
     },
     body: JSON.stringify({
-      modal: "sarvam-m",
-      message: [
+      model: "sarvam-m",
+      messages: [
         {role: "system", content: "you are a helpful study notes generation."},
         {role: "user", content: prompt}
       ],
