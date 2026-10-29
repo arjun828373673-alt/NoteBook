@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
           console.error(error);
           notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\n(AI Summarization failed, showing raw transcript)`;
         }
+      }
       })
     }
   })
