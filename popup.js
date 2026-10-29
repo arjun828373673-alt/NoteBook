@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }  
       if (response) {
         if (!notesArea.value) {
+          try {
+         
           notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
         }
       }
