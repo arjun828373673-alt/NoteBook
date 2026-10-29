@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }  
       if (response) {
           try {
-         const summary = await summerizeWithSarvam(response.videoTitle, response.transcriptText);
-          notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
+         const summary = await summarizeWithSarvam(response.videoTitle, response.transcriptText);
+         notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\nNotes:\n`;
         } catch (error) {
           console.error(error);
           notesArea.value = `Video: ${response.videoTitle}\nURL: ${response.videoUrl}\n\nTranscript:\n${response.transcriptText}\n\n(AI Summarization failed, showing raw transcript)`;
@@ -42,10 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-async function summerizeWithSarvam(Title, transcript) {
+async function summarizeWithSarvam(Title, transcript) {
   const SARVAM_API_KEY = "sk_hrq0e29j_qEeQjRzgVzzEJHu7mf23kRcG";
 
-  const prompt = `You are an export study assistant. Summarize the following YouTube video Transection into clean, concise bullet points covering bullet points covering all the key topics and main takeways. Avoid raw Text clutter. \n\nVideo Title: ${Title}\n\nTranscript:\n${transcript}`;
+  const prompt = `You are an expert study assistant. Summarize the following YouTube video Transcript into clean, concise bullet points covering bullet points covering all the key topics and main takeways. Avoid raw Text clutter. \n\nVideo Title: ${Title}\n\nTranscript:\n${transcript}`;
   try {
     const res = await fetch("https://api.sarvam.ai/v1/chat/completions", {
     method: "Post",
